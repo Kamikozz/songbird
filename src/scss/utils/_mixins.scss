@@ -1,0 +1,30 @@
+@import 'breakpoints_mixins';
+
+@mixin font-face(
+  $font-family,
+  $file-path,
+  $weight: normal,
+  $display: swap,
+  $style: normal
+) {
+  @font-face {
+    font: {
+      family: $font-family;
+      style: $style;
+      weight: $weight;
+      display: $display;
+    }
+    // src:  url("#{$file-path}.eot"); /* IE 9 Compatibility Mode */
+    src:  local($font-family),
+          /* IE < 9 */
+          // url("#{$file-path}.eot?#iefix") format("embedded-opentype"),
+          /* Super Modern Browsers */
+          // url("#{$file-path}.woff2") format("woff2"),
+          /* Firefox >= 3.6, any other modern browser */
+          // url("#{$file-path}.woff") format("woff"),
+          /* Safari, Android, iOS */
+          url("#{$file-path}.ttf") format("truetype"),
+          /* Chrome < 4, Legacy iOS */
+          // url("#{$file-path}.svg") format("svg");
+  }
+}

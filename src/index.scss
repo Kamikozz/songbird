@@ -1,0 +1,31 @@
+@import "scss/utils/libs";
+@import "scss/utils/vars";
+@import "scss/utils/mixins";
+@import "scss/utils/reset-css";
+@import "scss/utils/fonts";
+@import "scss/utils/animations";
+
+html {
+  box-sizing: border-box;
+
+  font-size: 10px;
+}
+
+body {
+  min-width: $small-phone-width;
+  min-height: 100vh;
+  height: 100%;
+
+  font: {
+    family: $main-font;
+    weight: $main-font-weight;
+  }
+
+  backdrop-filter: blur(10px);
+  overflow-x: hidden;
+
+  background-color: $primary-color; // #226912;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

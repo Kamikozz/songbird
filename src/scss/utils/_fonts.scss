@@ -1,0 +1,10 @@
+// -------------------------------------------------------------------------------------
+// font-face($font-family, $file-path, $weight: normal, $display: swap, $style: normal)
+// -------------------------------------------------------------------------------------
+// @include font-face("Open Sans", "/assets/fonts/OpenSans/OpenSans-Light", 300);
+// @include font-face("Open Sans", "/assets/fonts/OpenSans/OpenSans-Regular", 400);
+// @include font-face("Open Sans", "/assets/fonts/OpenSans/OpenSans-SemiBold", 600);
+// @include font-face("Open Sans", "/assets/fonts/OpenSans/OpenSans-Bold", 700);
+// @include font-face("Open Sans", "/assets/fonts/OpenSans/OpenSans-ExtraBold", 800);
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
