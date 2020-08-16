@@ -1,0 +1,12 @@
+@import "../../scss/utils/vars";
+@import "../../scss/utils/mixins";
+
+.wrapper {
+  margin: 0 auto;
+
+  transition: padding 0.5s ease-out, margin 0.5s ease-out;
+
+  @include for-small-phone { padding: 0 10px; }
+  @include for-tablet { padding: 0 30px; }
+  @include for-desktop { padding: 0 90px; }
+}

@@ -1,0 +1,36 @@
+@import "../../scss/utils/vars";
+@import "../../scss/utils/mixins";
+
+.list-container {
+  & {
+    width: 100%;
+
+    @include for-tablet {
+      margin-right: 20px;
+    }
+  }
+
+  &__item {
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+
+  &__button {
+    & {
+      width: 100%;
+      padding: 10px;
+
+      text-shadow: 0px 0px 1px black;
+  
+      cursor: pointer;
+    }
+
+    &:hover {
+      background-color: lightblue;
+    }
+
+    &:active {
+      background-color: darken(lightblue, 10);
+    }
+  }
+}

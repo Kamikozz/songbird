@@ -1,0 +1,15 @@
+@import "../../scss/utils/vars";
+@import "../../scss/utils/mixins";
+
+.main-content-body {
+  & {
+    padding-top: 20px;
+  }
+
+  &__container {
+    display: flex;
+
+    @include for-small-phone { flex-direction: column; }
+    @include for-tablet { flex-direction: row; }
+  }
+}

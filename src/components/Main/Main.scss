@@ -1,0 +1,29 @@
+.main-content {
+  & {
+    padding-top: 20px;
+  }
+
+  &__control-button {
+    & {
+      padding: 10px;
+      margin-top: 20px;
+      width: 100%;
+  
+      background-color: darkred;
+      border-radius: 10px;
+  
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    &:hover {
+      background-color: darken(darkred, 5%);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px black;
+    }
+  }
+}

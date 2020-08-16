@@ -1,0 +1,31 @@
+.header {
+  & {
+    text-shadow: 0px 0px 1px black;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    font: {
+      size: 2rem;
+    }
+    color: black;
+  }
+
+  &__logo {
+    & {
+      // color: black;
+    }
+
+    &_colored {
+      color: red;
+    }
+  }
+
+  &__categories {
+    margin-top: 10px;
+  }
+}
