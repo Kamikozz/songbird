@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import SongList from '../SongList/SongList';
 import SongCard from '../SongCard/SongCard';
-// import Player from '../Player/Player';
 
 import './MainSectionBody.scss';
 
@@ -30,22 +29,23 @@ const MainSectionBody = (props) => {
     <div className="main-content-body">
       <div className="main-content-body__container">
         <SongList items={songItems} />
-        <SongCard data={data} isExtended={SONG_CARD_EXTENDED} isGuessed={isGuessed} />
+        <SongCard
+          parentClassName="main-content"
+          data={data}
+          isExtended={SONG_CARD_EXTENDED}
+          isGuessed={isGuessed}
+        />
       </div>
     </div>
   );
 };
 
 MainSectionBody.propTypes = {
-  // songTitle: PropTypes.string,
-  // coverUrl: PropTypes.string,
   songItems: PropTypes.arrayOf(PropTypes.object),
   isGuessed: PropTypes.bool,
 };
 
 MainSectionBody.defaultProps = {
-  // songTitle: '*****',
-  // coverUrl: '',
   songItems: [],
   isGuessed: true,
 };

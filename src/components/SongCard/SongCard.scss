@@ -29,10 +29,18 @@
 
   &__container-item {
     display: flex;
-    padding-top: 20px;
 
-    @include for-small-phone { flex-direction: column; }
-    @include for-tablet { flex-direction: row; }
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+
+    @include for-small-phone {
+      flex-direction: column;
+    }
+
+    @include for-tablet {
+      flex-direction: row;
+    }
   }
 
   &__image-container {

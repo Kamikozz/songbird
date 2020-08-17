@@ -20,7 +20,13 @@ const Main = (props) => {
       <WrapperContainer>
         <MainSectionHeader songItems={songItems} isGuessed={isGuessed} />
         <MainSectionBody songItems={songItems} />
-        <button className="main-content__control-button" type="button">Next Level</button>
+        <button
+          className="main-content__control-button"
+          type="button"
+          disabled
+        >
+          Next Level
+        </button>
         { children }
       </WrapperContainer>
     </main>

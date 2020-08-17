@@ -1,12 +1,53 @@
+@import "../../scss/utils/vars";
+@import "../../scss/utils/mixins";
+
+%section-padding {
+  padding-top: 20px;
+}
+%section-margin {
+  margin-top: 20px;
+}
+
 .main-content {
   & {
-    padding-top: 20px;
+    @extend %section-padding;
+  }
+
+  &__song-card {
+    @include for-small-phone {
+      margin-top: 20px;
+    }
+
+    @include for-tablet {
+      margin-top: 0;
+    }
+  }
+
+  &__song-card-container-item {
+    @include for-small-phone {
+      flex-direction: column;
+    }
+
+    @include for-desktop {
+      flex-direction: row;
+    }
+  }
+
+  &__song-card-player-container {
+    @include for-tablet {
+      margin-left: 0;
+      padding-top: 20px;
+    }
+
+    @include for-desktop {
+      margin-left: 20px;
+    }
   }
 
   &__control-button {
     & {
+      @extend %section-margin;
       padding: 10px;
-      margin-top: 20px;
       width: 100%;
   
       background-color: darkred;
@@ -15,6 +56,7 @@
       color: white;
       font-size: 2rem;
       cursor: pointer;
+      transition: color 0.35s ease-out, background-color 0.35s ease-out;
     }
 
     &:hover {
@@ -24,6 +66,11 @@
     &:focus {
       outline: none;
       box-shadow: 0 0 0 1px black;
+    }
+
+    &:disabled {
+      background-color: grey;
+      color: lightgrey;
     }
   }
 }

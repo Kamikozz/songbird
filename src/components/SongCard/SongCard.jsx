@@ -1,33 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import SongCardImage from './SongCardImage';
+import SongCardDescription from './SongCardDescription';
 import Player from '../Player/Player';
 
 import './SongCard.scss';
-
-const SongCardImage = (props) => {
-  const { coverUrl } = props;
-
-  return (
-    <div
-      className="song-card__image-container"
-    >
-      <img
-        className="song-card__image"
-        src={coverUrl}
-        alt="correct artist"
-      />
-    </div>
-  );
-};
-
-const Description = (props) => {
-  const { description } = props;
-
-  return (
-    <p className="song-card__description">{description}</p>
-  );
-};
 
 const DEFAULT_COVER = 'https://i.pinimg.com/736x/bc/7b/fa/bc7bfa3234eff0c9814939be6faac33c.jpg';
 
@@ -36,6 +14,7 @@ const SongCard = (props) => {
     data,
     isExtended,
     isGuessed,
+    parentClassName,
   } = props;
 
   //   artist: 'Madonna',
@@ -51,25 +30,35 @@ const SongCard = (props) => {
     header,
     spotifyId,
   } = data;
-  const songTitle = `${artist} - ${song}`;
+  let songTitle = `${artist} - ${song}`;
+
+  songTitle = isGuessed ? songTitle : '*'.repeat(songTitle.length);
 
   let { coverUrl } = data;
 
   coverUrl = isGuessed ? coverUrl : DEFAULT_COVER;
 
-  console.log(coverUrl, isGuessed);
+  const songCardClasses = `song-card${
+    isExtended ? ` ${parentClassName}__song-card` : ''
+  }`;
+  const songCardContainerItemClasses = `song-card__container-item ${
+    isExtended ? ` ${parentClassName}__song-card-container-item` : ''
+  }`;
+  const songCardPlayerContainerClasses = `song-card__player-container${
+    isExtended ? ` ${parentClassName}__song-card-player-container` : ''
+  }`;
 
   return (
     <div
       style={{ backgroundImage: `url(${coverUrl})` }}
-      className="song-card"
+      className={songCardClasses}
       key={spotifyId}
     >
       <div className="song-card__blur-wrapper">
         <div className="song-card__container">
-          <div className="song-card__container-item">
+          <div className={songCardContainerItemClasses}>
             <SongCardImage coverUrl={coverUrl} />
-            <div className="song-card__player-container">
+            <div className={songCardPlayerContainerClasses}>
               <h3 className="song-card__song-title">{songTitle}</h3>
               { isExtended && <h4 className="song-card__song-subtitle">{header}</h4> }
               <Player />
@@ -77,7 +66,7 @@ const SongCard = (props) => {
           </div>
           { isExtended && (
             <div className="song-card__container-item">
-              <Description description={description} />
+              <SongCardDescription description={description} />
             </div>
           )}
         </div>
@@ -86,29 +75,17 @@ const SongCard = (props) => {
   );
 };
 
-SongCardImage.propTypes = {
-  coverUrl: PropTypes.string,
-};
-SongCardImage.defaultProps = {
-  coverUrl: '',
-};
-
-Description.propTypes = {
-  description: PropTypes.string,
-};
-Description.defaultProps = {
-  description: '<-- Нет данных -->',
-};
-
 SongCard.propTypes = {
   data: PropTypes.objectOf(PropTypes.string),
   isExtended: PropTypes.bool,
   isGuessed: PropTypes.bool,
+  parentClassName: PropTypes.string,
 };
 SongCard.defaultProps = {
   data: {},
   isExtended: false,
   isGuessed: false,
+  parentClassName: '',
 };
 
 export default SongCard;
