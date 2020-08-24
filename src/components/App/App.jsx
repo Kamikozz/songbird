@@ -56,16 +56,6 @@ class App extends React.Component {
     }, this.changeGuessedItem);
   }
 
-  handlerUpdateScore() {
-    this.setState((state) => {
-      const { score } = state;
-
-      return {
-        score: score + 1,
-      };
-    });
-  }
-
   handlerNextCategory() {
     let { activeIndex } = this.state;
 
@@ -116,6 +106,7 @@ class App extends React.Component {
     });
 
     if (isGuessed) {
+      this.handlerUpdateScore();
       this.setState({
         isGuessed,
       });
@@ -126,6 +117,21 @@ class App extends React.Component {
         incorrectAnswers,
       });
     }
+  }
+
+  handlerUpdateScore() {
+    this.setState((state) => {
+      const {
+        score,
+        songItems,
+        incorrectAnswers,
+      } = state;
+      const POINTS_MINUS_MISTAKES = (songItems.length - 1 - incorrectAnswers.size);
+
+      return {
+        score: score + POINTS_MINUS_MISTAKES,
+      };
+    });
   }
 
   changeGuessedItem() {
