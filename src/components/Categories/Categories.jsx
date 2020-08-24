@@ -5,12 +5,12 @@ import './Categories.scss';
 
 const Categories = (props) => {
   const {
-    value,
+    activeIndex,
     categories,
   } = props;
 
   const categoriesJsx = categories.map((item, index) => {
-    const isSelected = index === value;
+    const isSelected = index === activeIndex;
 
     return isSelected
       ? (
@@ -37,12 +37,12 @@ const Categories = (props) => {
 };
 
 Categories.propTypes = {
-  value: PropTypes.number,
+  activeIndex: PropTypes.number,
   categories: PropTypes.arrayOf(PropTypes.string),
 };
 
 Categories.defaultProps = {
-  value: 0,
+  activeIndex: 0,
   categories: [],
 };
 

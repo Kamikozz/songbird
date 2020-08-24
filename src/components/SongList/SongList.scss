@@ -11,8 +11,22 @@
   }
 
   &__item {
-    border: 1px solid black;
-    border-radius: 10px;
+    & {
+      border: 1px solid black;
+      border-radius: 10px;
+
+      background-color: whitesmoke;
+
+      transition: background-color 0.35s ease-out;
+    }
+
+    &_correct {
+      background-color: lightgreen;
+    }
+
+    &_incorrect {
+      background-color: lightcoral;
+    }
   }
 
   &__button {
@@ -20,18 +34,19 @@
       width: 100%;
       padding: 10px;
 
+      background-color: transparent;
       text-shadow: 0px 0px 1px black;
-  
       cursor: pointer;
+
       transition: background-color 0.35s ease-out;
     }
 
     &:hover {
-      background-color: lightblue;
+      background-color: rgba(0, 0, 0, 0.05);
     }
 
     &:active {
-      background-color: darken(lightblue, 10);
+      background-color: rgba(0, 0, 0, 0.15);
     }
   }
 }
