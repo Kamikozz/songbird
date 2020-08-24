@@ -37,6 +37,7 @@ class Main extends React.Component {
         <WrapperContainer>
           <MainSectionHeader
             songItems={songItems}
+            guessedItemId={guessedItemId}
             isGuessed={isGuessed}
           />
           <MainSectionBody

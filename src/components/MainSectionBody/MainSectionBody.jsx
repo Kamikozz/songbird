@@ -32,9 +32,7 @@ class MainSectionBody extends React.Component {
       // onItemClick,
     } = this.props;
 
-    // const data = songItems[0];
-
-    const data = undefined;
+    const data = songItems.find(({ spotifyId }) => selectedItemId === spotifyId);
 
     // const data = {
     //   artist: '',

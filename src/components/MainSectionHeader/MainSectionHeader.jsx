@@ -6,9 +6,13 @@ import SongCard from '../SongCard/SongCard';
 import './MainSectionHeader.scss';
 
 const MainSectionHeader = (props) => {
-  const { songItems, isGuessed } = props;
+  const {
+    songItems,
+    isGuessed,
+    guessedItemId,
+  } = props;
 
-  const data = songItems[0];
+  const data = songItems.find(({ spotifyId }) => guessedItemId === spotifyId);
 
   return (
     <div className="main-content-header">
@@ -21,10 +25,12 @@ const MainSectionHeader = (props) => {
 
 MainSectionHeader.propTypes = {
   songItems: PropTypes.arrayOf(PropTypes.object),
+  guessedItemId: PropTypes.string,
   isGuessed: PropTypes.bool,
 };
 MainSectionHeader.defaultProps = {
   songItems: [],
+  guessedItemId: '',
   isGuessed: false,
 };
 
