@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SongCardImage from './SongCardImage';
-import SongCardDescription from './SongCardDescription';
+import SongCardNoData from './SongCardNoData/SongCardNoData';
+import SongCardImage from './SongCardImage/SongCardImage';
+import SongCardDescription from './SongCardDescription/SongCardDescription';
+
 import Player from '../Player/Player';
 
 import './SongCard.scss';
@@ -13,8 +15,17 @@ const SongCard = (props) => {
   const {
     data,
     isExtended,
-    isGuessed,
     parentClassName,
+  } = props;
+
+  if (!data) {
+    return (
+      <SongCardNoData isExtended={isExtended} parentClassName={parentClassName} />
+    );
+  }
+
+  const {
+    isGuessed,
   } = props;
 
   //   artist: 'Madonna',
@@ -82,7 +93,7 @@ SongCard.propTypes = {
   parentClassName: PropTypes.string,
 };
 SongCard.defaultProps = {
-  data: {},
+  data: null,
   isExtended: false,
   isGuessed: false,
   parentClassName: '',

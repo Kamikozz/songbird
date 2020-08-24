@@ -6,7 +6,7 @@
     width: 100%;
     overflow: hidden;
 
-    // background-image: url(https://birds-quiz.netlify.app/static/media/bird.06a46938.jpg);
+    background-color: whitesmoke;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -24,11 +24,15 @@
   }
 
   &__container {
+    height: 100%;
     padding: 25px;
   }
 
   &__container-item {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 
     &:not(:first-child) {
       margin-top: 20px;
