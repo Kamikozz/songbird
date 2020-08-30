@@ -12,20 +12,32 @@ html {
 }
 
 body {
-  min-width: $small-phone-width;
-  min-height: 100vh;
-  height: 100%;
+  & {
+    min-width: $small-phone-width;
+    min-height: 100vh;
+    height: 100%;
 
-  font: {
-    family: $main-font;
-    weight: $main-font-weight;
+    font: {
+      family: $main-font;
+      weight: $main-font-weight;
+    }
+
+    backdrop-filter: blur(10px);
+    overflow-x: hidden;
+
+    background-color: $primary-color; // #226912;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  backdrop-filter: blur(10px);
-  overflow-x: hidden;
+  /* styling scrollbar */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: darkred;
+  }
 
-  background-color: $primary-color; // #226912;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  &::-webkit-scrollbar{
+    width: 8px;
+  }
 }
