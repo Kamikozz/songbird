@@ -88,11 +88,17 @@ const rawGetGenresByScraping = async (songId) => {
   return response;
 };
 
-const concatenateString = (children) => children
+const concatenateString = (items) => items
   .map((item) => {
-    const isReactDepth = utils.isString(item);
+    const isReachDepth = utils.isString(item);
 
-    return isReactDepth ? item : concatenateString(item.children);
+    if (isReachDepth) {
+      return item;
+    }
+
+    const { children = [''] } = item;
+
+    return concatenateString(children);
   })
   .join('');
 
@@ -133,8 +139,11 @@ class GeniusApi {
   }
 
   static getArtistDescription(descriptionStructureObject) {
-    const { dom } = descriptionStructureObject;
-    const { children } = dom;
+    const {
+      dom: {
+        children,
+      },
+    } = descriptionStructureObject;
 
     return concatenateString(children);
   }

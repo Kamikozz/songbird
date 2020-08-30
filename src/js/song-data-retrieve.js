@@ -36,8 +36,28 @@ const getSpotifyData = async () => {
   return items;
 };
 
+const geniusPageViewsExtractor = (item) => {
+  const {
+    result: {
+      stats: {
+        pageviews = 0,
+      },
+    },
+  } = item;
+
+  return pageviews;
+};
+
 const getGeniusData = async (query) => {
   const searchResult = await GeniusApi.search(query, (data) => {
+    data.sort((leftItem, rightItem) => {
+      const leftItemPopularity = geniusPageViewsExtractor(leftItem);
+      const rightItemPopularity = geniusPageViewsExtractor(rightItem);
+      const descendingOrder = rightItemPopularity - leftItemPopularity; // 3 2 1
+
+      return descendingOrder;
+    });
+
     const [firstResult] = data;
     const { result } = firstResult;
     const {
