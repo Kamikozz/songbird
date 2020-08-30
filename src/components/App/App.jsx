@@ -5,6 +5,8 @@ import Score from '../Score/Score';
 import Categories from '../Categories/Categories';
 import Main from '../Main/Main';
 
+import getSongData from '../../js/song-data-retrieve';
+
 // eslint-disable-next-line import/no-unresolved
 import './App.scss';
 
@@ -28,32 +30,67 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.setState({
-      categories: ['Pop', 'Hip-Hop', 'Rock', 'Russian', 'Swag'],
-      songItems: [{
-        artist: 'Madonna',
-        song: 'Hello',
-        description: 'Для ласточек характерно негромкое щебетание. Песни ласточек не смолкают на протяжении всего лета. Исследователи различают у птиц до 6 щебечущих звуков: «вит», «ви-вит», «чивит», «чиривит» и т.п. Ласточки любят петь дуэтом.',
-        coverUrl: 'https://birds-quiz.netlify.app/static/media/bird.06a46938.jpg',
-        header: 'Delichon urbicum',
-        spotifyId: '123123123',
-      }, {
-        artist: 'Snoop Dogg',
-        song: 'Doggystyle',
-        description: '',
-        coverUrl: 'https://avatars.mds.yandex.net/get-pdb/51720/91e24d4c-b631-4fa2-9ba0-33632a5903a2/s1200',
-        header: '',
-        spotifyId: '234234234',
-      }, {
-        artist: '2pac',
-        song: 'DragonMoney',
-        description: '',
-        coverUrl: 'https://avatars.mds.yandex.net/get-pdb/2864819/b08ff1a1-514a-4523-9945-c99f7fd29b64/s1200',
-        header: '',
-        spotifyId: '4444444',
-      }],
-    }, this.changeGuessedItem);
+  async componentDidMount() {
+    getSongData()
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          categories: ['Pop', 'Hip-Hop', 'Rock', 'Russian', 'Swag'],
+          songItems: data,
+          // songItems: [{
+          //   artist: 'Madonna',
+          //   song: 'Hello',
+          //   description: 'Для ласточек характерно негромкое щебетание. Песни ласточек не
+          // смолкают на протяжении всего лета. Исследователи различают у птиц до 6 щебечущих
+          // звуков: «вит», «ви-вит», «чивит», «чиривит» и т.п. Ласточки любят петь дуэтом.',
+          //   coverUrl: 'https://birds-quiz.netlify.app/static/media/bird.06a46938.jpg',
+          //   header: 'Delichon urbicum',
+          //   spotifyId: '123123123',
+          // }, {
+          //   artist: 'Snoop Dogg',
+          //   song: 'Doggystyle',
+          //   description: '',
+          //   coverUrl: 'https://avatars.mds.yandex.net/get-pdb/51720/91e24d4c-b631-4fa2-9ba0-33632a5903a2/s1200',
+          //   header: '',
+          //   spotifyId: '234234234',
+          // }, {
+          //   artist: '2pac',
+          //   song: 'DragonMoney',
+          //   description: '',
+          //   coverUrl: 'https://avatars.mds.yandex.net/get-pdb/2864819/b08ff1a1-514a-4523-9945-c99f7fd29b64/s1200',
+          //   header: '',
+          //   spotifyId: '4444444',
+          // }],
+        }, this.changeGuessedItem);
+      });
+
+    // this.setState({
+    //   categories: ['Pop', 'Hip-Hop', 'Rock', 'Russian', 'Swag'],
+    //   songItems: [{
+    //     artist: 'Madonna',
+    //     song: 'Hello',
+    //     description: 'Для ласточек характерно негромкое щебетание. Песни ласточек не смолкают на
+    // протяжении всего лета. Исследователи различают у птиц до 6 щебечущих звуков: «вит»,
+    // «ви-вит», «чивит», «чиривит» и т.п. Ласточки любят петь дуэтом.',
+    //     coverUrl: 'https://birds-quiz.netlify.app/static/media/bird.06a46938.jpg',
+    //     header: 'Delichon urbicum',
+    //     spotifyId: '123123123',
+    //   }, {
+    //     artist: 'Snoop Dogg',
+    //     song: 'Doggystyle',
+    //     description: '',
+    //     coverUrl: 'https://avatars.mds.yandex.net/get-pdb/51720/91e24d4c-b631-4fa2-9ba0-33632a5903a2/s1200',
+    //     header: '',
+    //     spotifyId: '234234234',
+    //   }, {
+    //     artist: '2pac',
+    //     song: 'DragonMoney',
+    //     description: '',
+    //     coverUrl: 'https://avatars.mds.yandex.net/get-pdb/2864819/b08ff1a1-514a-4523-9945-c99f7fd29b64/s1200',
+    //     header: '',
+    //     spotifyId: '4444444',
+    //   }],
+    // }, this.changeGuessedItem);
   }
 
   handlerNextCategory() {
