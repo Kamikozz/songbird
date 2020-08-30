@@ -21,7 +21,8 @@
     }
 
     &_correct {
-      background-color: lightgreen;
+      background-color: black; // darkgreen;
+      color: red;
     }
 
     &_incorrect {

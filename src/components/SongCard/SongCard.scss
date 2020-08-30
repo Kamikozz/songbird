@@ -111,7 +111,7 @@
   &__description {
     & {
       padding: 5px;
-      height: 200px;
+      max-height: 200px;
       overflow-y: scroll;
   
       color: white;
@@ -125,7 +125,8 @@
 
     /* styling scrollbar */
     &::-webkit-scrollbar-thumb {
-      border-radius: 5px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
       background-color: whitesmoke;
     }
 
