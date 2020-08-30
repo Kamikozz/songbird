@@ -98,8 +98,6 @@ class App extends React.Component {
 
       this.resetGame();
     }
-
-    console.log('SHIT HAPPENED');
   }
 
   resetGame() {
@@ -123,8 +121,6 @@ class App extends React.Component {
 
     const { guessedItemId } = this.state;
     const isGuessed = guessedItemId === selectedItemId;
-
-    console.log('ЕБАТЬ ОНО ДОШЛО:', selectedItemId, isGuessed);
 
     this.setState({
       selectedItemId,
@@ -181,8 +177,6 @@ class App extends React.Component {
       guessedItemId,
       selectedItemId,
     } = this.state;
-
-    console.log('App', score, guessedItemId);
 
     const scoreComponent = <Score score={score} onUpdateScore={this.handlerUpdateScore} />;
 
