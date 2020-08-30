@@ -4,6 +4,7 @@
 .song-card {
   & {
     width: 100%;
+    height: 100%;
     overflow: hidden;
 
     background-color: whitesmoke;
@@ -109,6 +110,8 @@
 
   &__description {
     padding: 5px;
+    height: 200px;
+    overflow-y: scroll;
 
     color: white;
     font: {

@@ -36,7 +36,7 @@
   &__song-card-player-container {
     @include for-tablet {
       margin-left: 0;
-      padding-top: 20px;
+      // padding-top: 20px;
     }
 
     @include for-desktop {
