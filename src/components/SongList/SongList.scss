@@ -31,6 +31,10 @@
     }
   }
 
+  %button-children-no-pointer-events {
+    pointer-events: none;
+  }
+
   &__button {
     & {
       width: 100%;
@@ -51,5 +55,19 @@
     &:active {
       background-color: rgba(0, 0, 0, 0.15);
     }
+  }
+
+  &__song-artist {
+    @extend %button-children-no-pointer-events;
+
+    font-weight: bold;
+  }
+
+  &__song-separator {
+    @extend %button-children-no-pointer-events;
+  }
+
+  &__song-name {
+    @extend %button-children-no-pointer-events;
   }
 }

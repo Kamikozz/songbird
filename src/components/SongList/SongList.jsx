@@ -26,6 +26,15 @@ const dirtyClasses = {
       BUTTON: {
         _class: 'button',
       },
+      ARTIST: {
+        _class: 'song-artist',
+      },
+      SONG_SEPARATOR: {
+        _class: 'song-separator',
+      },
+      SONG: {
+        _class: 'song-name',
+      },
     },
     modifiers: {
       BLACKED: {
@@ -83,7 +92,7 @@ class SongList extends React.Component {
       song,
       spotifyId,
     }) => {
-      const option = `${artist} - ${song}`;
+      // const option = `${artist} - ${song}`;
 
       // // let itemClassName = getClassName(c.ROOT.ITEM);
       // let itemClassName;
@@ -133,7 +142,9 @@ class SongList extends React.Component {
             data-id={spotifyId}
             onClick={this.itemClick}
           >
-            {option}
+            <span className={getClassName(c.ROOT.ARTIST)}>{artist}</span>
+            <span className={getClassName(c.ROOT.SONG_SEPARATOR)}> - </span>
+            <span className={getClassName(c.ROOT.SONG)}>{song}</span>
           </button>
         </li>
       );

@@ -106,6 +106,8 @@ class GeniusApi {
   static async search(query, mapper = null) {
     let searchData = await rawSearch(query);
 
+    console.log('SearchData: ', searchData);
+
     if (searchData && mapper) {
       searchData = mapper(searchData);
     }
