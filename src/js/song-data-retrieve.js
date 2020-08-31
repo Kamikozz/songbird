@@ -3,6 +3,14 @@ import GeniusApi from './api/genius-api';
 
 const PLAYLIST_ID = '36uYR7ML0EoytdM7o7IT5r';
 
+const removeFeaturingArtists = (sourceString) => {
+  const BRACKET = '('; // symbol where featuring or with starts
+  const openBracketIndex = sourceString.indexOf(BRACKET);
+  const isFoundFeaturing = openBracketIndex !== -1;
+
+  return isFoundFeaturing ? sourceString.slice(0, openBracketIndex - 1) : sourceString;
+};
+
 const getSpotifyData = async () => {
   const result = await SpotifyApi.getPlaylistItems(PLAYLIST_ID);
   let { items } = result;
@@ -25,7 +33,7 @@ const getSpotifyData = async () => {
     const { url: imageUrl } = previewImageObject;
 
     return {
-      songName,
+      songName: removeFeaturingArtists(songName),
       songArtistName,
       imageUrl,
       audioUrl,
@@ -171,7 +179,7 @@ const getSongData = async () => {
   const dirtySongData = await getData();
   const songData = await makeSongDataStructure(dirtySongData);
 
-  return songData.filter((item) => Boolean(item));
+  return songData.filter((item) => Boolean(item) && item.description !== '?');
 };
 
 export default getSongData;
