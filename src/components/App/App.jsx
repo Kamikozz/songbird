@@ -56,37 +56,13 @@ class App extends React.Component {
 
         const songGenreNames = Object.keys(songGroups);
         const currentSongGenreName = songGenreNames[activeCategoryIndex];
-        const songItems = songGroups[currentSongGenreName];
+        const songItems = songGroups[currentSongGenreName].slice(0, 6); // take 6 elements
 
         this.setState({
           categories: songGenreNames,
           songGroups,
           songItems,
           isLoading: false,
-          // songItems: [{
-          //   artist: 'Madonna',
-          //   song: 'Hello',
-          //   description: 'Для ласточек характерно негромкое щебетание. Песни ласточек не
-          // смолкают на протяжении всего лета. Исследователи различают у птиц до 6 щебечущих
-          // звуков: «вит», «ви-вит», «чивит», «чиривит» и т.п. Ласточки любят петь дуэтом.',
-          //   coverUrl: 'https://birds-quiz.netlify.app/static/media/bird.06a46938.jpg',
-          //   header: 'Delichon urbicum',
-          //   spotifyId: '123123123',
-          // }, {
-          //   artist: 'Snoop Dogg',
-          //   song: 'Doggystyle',
-          //   description: '',
-          //   coverUrl: 'https://avatars.mds.yandex.net/get-pdb/51720/91e24d4c-b631-4fa2-9ba0-33632a5903a2/s1200',
-          //   header: '',
-          //   spotifyId: '234234234',
-          // }, {
-          //   artist: '2pac',
-          //   song: 'DragonMoney',
-          //   description: '',
-          //   coverUrl: 'https://avatars.mds.yandex.net/get-pdb/2864819/b08ff1a1-514a-4523-9945-c99f7fd29b64/s1200',
-          //   header: '',
-          //   spotifyId: '4444444',
-          // }],
         }, this.changeGuessedItem);
       });
   }
@@ -105,7 +81,7 @@ class App extends React.Component {
       const { songGroups } = this.state;
 
       const currentSongGenreName = categories[activeIndex];
-      const songItems = songGroups[currentSongGenreName];
+      const songItems = songGroups[currentSongGenreName].slice(0, 6); // take 6 elements;
 
       this.setState({
         activeIndex,

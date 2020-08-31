@@ -47,24 +47,6 @@ const Categories = (props) => {
         {makeHumanReadableSongGenres(item)}
       </li>
     );
-
-    // return isSelected
-    //   ? (
-    //     <li
-    //       className={categoriesItemClassName}
-    //       key={item}
-    //     >
-    //       {item}
-    //     </li>
-    //   )
-    //   : (
-    //     <li
-    //       className="categories__item"
-    //       key={item}
-    //     >
-    //       {item}
-    //     </li>
-    //   );
   });
 
   return (

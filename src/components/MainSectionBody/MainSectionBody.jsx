@@ -15,7 +15,6 @@ class MainSectionBody extends React.Component {
     this.onItemClick = this.onItemClick.bind(this);
   }
 
-  // TODO: remove this shit & THINK OUT ABOUT HOW TO RERENDER STATE
   onItemClick(selectedItemId) {
     const { onItemClick } = this.props;
 
@@ -29,30 +28,9 @@ class MainSectionBody extends React.Component {
       isGuessed,
       guessedItemId,
       selectedItemId,
-      // onItemClick,
     } = this.props;
 
     const data = songItems.find(({ spotifyId }) => selectedItemId === spotifyId);
-
-    // const data = {
-    //   artist: '',
-    //   song: '',
-    //   description: '',
-    //   header: '',
-    //   spotifyId: '',
-    // };
-
-    // songItems: [{
-    //   artist: 'Madonna',
-    //   song: 'Hello',
-    //   description: 'cscsacasca',
-    //   header: 'Delichon urbicum',
-    //   spotifyId: '123123123',
-    // }, {
-    //   artist: 'Snoop Dogg',
-    //   song: 'Doggystyle',
-    //   spotifyId: '234234234',
-    // }],
 
     return (
       <div className="main-content-body">

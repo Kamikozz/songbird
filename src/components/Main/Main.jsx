@@ -7,60 +7,46 @@ import MainSectionBody from '../MainSectionBody/MainSectionBody';
 
 import './Main.scss';
 
-class Main extends React.Component {
-  constructor(props) {
-    super(props);
+const Main = (props) => {
+  const {
+    children,
+    isGuessed,
+    songItems,
+    incorrectAnswers,
+    guessedItemId,
+    selectedItemId,
+    onItemClick,
+    onNextCategoryButtonClick,
+  } = props;
 
-    // TODO: remove this
-    this.nextCategory = this.nextCategory.bind(this);
-  }
-
-  // TODO: remove this
-  nextCategory() {
-    console.log(this);
-  }
-
-  render() {
-    const {
-      children,
-      isGuessed,
-      songItems,
-      incorrectAnswers,
-      guessedItemId,
-      selectedItemId,
-      onItemClick,
-      onNextCategoryButtonClick,
-    } = this.props;
-
-    return (
-      <main className="main-content">
-        <WrapperContainer>
-          <MainSectionHeader
-            songItems={songItems}
-            guessedItemId={guessedItemId}
-            isGuessed={isGuessed}
-          />
-          <MainSectionBody
-            songItems={songItems}
-            incorrectAnswers={incorrectAnswers}
-            guessedItemId={guessedItemId}
-            selectedItemId={selectedItemId}
-            onItemClick={onItemClick}
-          />
-          <button
-            className="main-content__control-button"
-            type="button"
-            disabled={!isGuessed}
-            onClick={onNextCategoryButtonClick}
-          >
-            Next Level
-          </button>
-          { children }
-        </WrapperContainer>
-      </main>
-    );
-  }
-}
+  return (
+    <main className="main-content">
+      <WrapperContainer>
+        <MainSectionHeader
+          songItems={songItems}
+          guessedItemId={guessedItemId}
+          isGuessed={isGuessed}
+        />
+        <MainSectionBody
+          songItems={songItems}
+          incorrectAnswers={incorrectAnswers}
+          guessedItemId={guessedItemId}
+          selectedItemId={selectedItemId}
+          onItemClick={onItemClick}
+        />
+        <button
+          className="main-content__control-button"
+          type="button"
+          disabled={!isGuessed}
+          onClick={onNextCategoryButtonClick}
+        >
+          Next Level
+        </button>
+        { children }
+      </WrapperContainer>
+    </main>
+  );
+};
 
 Main.propTypes = {
   children: PropTypes.oneOfType([

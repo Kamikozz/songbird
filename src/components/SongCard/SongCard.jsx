@@ -28,12 +28,6 @@ const SongCard = (props) => {
     isGuessed,
   } = props;
 
-  //   artist: 'Madonna',
-  //   song: 'Hello',
-  //   description: 'cscsacasca',
-  //   header: 'Delichon urbicum',
-  //   spotifyId: '123123123',
-
   const {
     artist,
     song,

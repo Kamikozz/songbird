@@ -3,20 +3,11 @@ import PropTypes from 'prop-types';
 
 import './Score.scss';
 
-// import '../../js/api/spotify-api';
-
 class Score extends React.Component {
   constructor(props) {
     super(props);
 
     this.updateScore = this.updateScore.bind(this);
-
-    console.log('Score constructor');
-  }
-
-  componentDidMount() {
-    console.log('Component did mount');
-    // setInterval(this.updateScore, 2500);
   }
 
   updateScore() {
@@ -27,8 +18,6 @@ class Score extends React.Component {
 
   render() {
     const { score } = this.props;
-
-    console.log('yo cyka', score);
 
     return (
       <p className="score">

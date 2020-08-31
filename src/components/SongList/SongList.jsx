@@ -59,20 +59,8 @@ class SongList extends React.Component {
   }
 
   itemClick(event) {
-    // event.persist();
-    // console.log(event, this);
-
     const { target } = event;
     const selectedItemId = target.getAttribute('data-id');
-    // const { guessedItemId } = this.props;
-
-    // // console.log(id);
-
-    // const isGuessed = guessedItemId === selectedItemId;
-
-    // if (isGuessed) {
-    //   target.className = 'yoyoyo';
-    // }
 
     const { onItemClick } = this.props;
 
@@ -92,29 +80,6 @@ class SongList extends React.Component {
       song,
       spotifyId,
     }) => {
-      // const option = `${artist} - ${song}`;
-
-      // // let itemClassName = getClassName(c.ROOT.ITEM);
-      // let itemClassName;
-      // const isInitial = selectedItemId === '';
-
-      // if (isInitial) {
-      //   itemClassName = getClassName(c.ROOT.ITEM);
-      // } else {
-      //   const isSelectedItem = selectedItemId === spotifyId;
-
-      //   if (isSelectedItem) {
-      //     const isCorrect = guessedItemId === spotifyId;
-
-      //     itemClassName = `${getClassName(c.ROOT.ITEM)} ${isCorrect
-      //       ? getClassName(c.ROOT.ITEM.CORRECT)
-      //       : getClassName(c.ROOT.ITEM.INCORRECT)
-      //     }`;
-      //   } else {
-      //     itemClassName =
-      //   }
-      // }
-
       let itemClassName = getClassName(c.ROOT.ITEM);
       const isInitial = selectedItemId === '';
 

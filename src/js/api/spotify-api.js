@@ -16,7 +16,6 @@ const rawGetPlaylistItems = async (token, playlistId, limit) => {
   const params = `?limit=${limit}`;
   const url = `${BASE_URL}${endPoint}${params}`;
 
-  // console.log(token, playlistId, limit);
   const options = {
     method: 'GET',
     headers: {

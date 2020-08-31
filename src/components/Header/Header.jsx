@@ -1,16 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import Score from '../Score/Score';
-// import logo from '../../assets/img/logo.svg';
 import WrapperContainer from '../Wrapper/Wrapper';
 
 import './Header.scss';
 
 const Header = (props) => {
   const { children, scoreComponent } = props;
-
-  console.log('Header', children);
 
   return (
     <header className="header">
@@ -31,7 +27,6 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  // score: PropTypes.number,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
@@ -40,7 +35,6 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-  // score: 0,
   children: null,
   scoreComponent: null,
 };
