@@ -71,10 +71,10 @@ const rawSearch = async (query) => {
 };
 
 const rawGetGenresByScraping = async (songId) => {
-  // const PROXY = 'https://cors-anywhere.herokuapp.com/';
+  const PROXY = 'https://kamikozz-songbird-proxy-server.herokuapp.com/';
   const PUBLIC_URL = 'https://genius.com/';
   const ENDPOINT = `songs/${songId}`;
-  const url = `${PUBLIC_URL}${ENDPOINT}`; // /songs/3126688 // Blackpink-as-if-its-your-last-lyrics
+  const url = `${PROXY}${PUBLIC_URL}${ENDPOINT}`; // /songs/3126688 // Blackpink-as-if-its-your-last-lyrics
 
   let response;
 
