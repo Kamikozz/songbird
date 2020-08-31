@@ -53,7 +53,8 @@ class App extends React.Component {
         console.log(songGroups);
 
         this.setState({
-          categories: ['Pop', 'Hip-Hop', 'Rock', 'Russian', 'Swag'],
+          categories: Object.keys(songGroups).map((genre) => genre.toUpperCase()),
+          // categories: ['Pop', 'Hip-Hop', 'Rock', 'Russian', 'Swag'],
           songItems: data,
           isLoading: false,
           // songItems: [{
