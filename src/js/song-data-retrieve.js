@@ -104,7 +104,7 @@ const getGeniusData = async (query) => {
 
 // GeniusApi.getArtist(987404);
 const getData = async () => {
-  const songList = (await getSpotifyData()).slice(0, 20);
+  const songList = (await getSpotifyData()); // .slice(0, 100);
 
   console.log(songList);
   const ELEMENTS_COUNT = songList.length;
