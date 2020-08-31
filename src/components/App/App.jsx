@@ -33,6 +33,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const { activeIndex: activeCategoryIndex } = this.state;
+
     getSongData()
       .then((data) => {
         console.log(data);
@@ -52,10 +54,14 @@ class App extends React.Component {
 
         console.log(songGroups);
 
+        const songGenreNames = Object.keys(songGroups);
+        const currentSongGenreName = songGenreNames[activeCategoryIndex];
+        const songItems = songGroups[currentSongGenreName];
+
         this.setState({
-          categories: Object.keys(songGroups).map((genre) => genre.toUpperCase()),
-          // categories: ['Pop', 'Hip-Hop', 'Rock', 'Russian', 'Swag'],
-          songItems: data,
+          categories: songGenreNames,
+          songGroups,
+          songItems,
           isLoading: false,
           // songItems: [{
           //   artist: 'Madonna',
@@ -96,8 +102,14 @@ class App extends React.Component {
     if (isGameEnded) {
       alert('GAME ENDED! Retry?');
     } else {
+      const { songGroups } = this.state;
+
+      const currentSongGenreName = categories[activeIndex];
+      const songItems = songGroups[currentSongGenreName];
+
       this.setState({
         activeIndex,
+        songItems,
       });
 
       this.resetGame();
@@ -109,8 +121,7 @@ class App extends React.Component {
       isGuessed: false,
       incorrectAnswers: new Set(),
       selectedItemId: '',
-    });
-    this.changeGuessedItem();
+    }, this.changeGuessedItem);
   }
 
   handlerCheckGuessed(selectedItemId) {
@@ -161,6 +172,9 @@ class App extends React.Component {
 
   changeGuessedItem() {
     const { songItems } = this.state;
+
+    console.log(songItems);
+
     const LENGTH = songItems.length;
     const RANDOM_INT = Math.floor(Math.random() * LENGTH);
     const guessedItemId = songItems[RANDOM_INT].spotifyId;
