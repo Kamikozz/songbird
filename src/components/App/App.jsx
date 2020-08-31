@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import Score from '../Score/Score';
 import Categories from '../Categories/Categories';
 import Main from '../Main/Main';
+import Loader from '../Loader/Loader';
 
 import getSongData from '../../js/song-data-retrieve';
 
@@ -27,10 +28,11 @@ class App extends React.Component {
       isGuessed: false,
       guessedItemId: '',
       selectedItemId: '',
+      isLoading: true,
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     getSongData()
       .then((data) => {
         console.log(data);
@@ -53,6 +55,7 @@ class App extends React.Component {
         this.setState({
           categories: ['Pop', 'Hip-Hop', 'Rock', 'Russian', 'Swag'],
           songItems: data,
+          isLoading: false,
           // songItems: [{
           //   artist: 'Madonna',
           //   song: 'Hello',
@@ -176,27 +179,36 @@ class App extends React.Component {
       isGuessed,
       guessedItemId,
       selectedItemId,
+      isLoading,
     } = this.state;
 
     const scoreComponent = <Score score={score} onUpdateScore={this.handlerUpdateScore} />;
 
     return (
       <div className="app">
-        <Header scoreComponent={scoreComponent}>
-          <Categories
-            activeIndex={activeIndex}
-            categories={categories}
-          />
-        </Header>
-        <Main
-          songItems={songItems}
-          incorrectAnswers={incorrectAnswers}
-          isGuessed={isGuessed}
-          guessedItemId={guessedItemId}
-          selectedItemId={selectedItemId}
-          onItemClick={this.handlerCheckGuessed}
-          onNextCategoryButtonClick={this.handlerNextCategory}
-        />
+        {
+          isLoading
+            ? <Loader />
+            : (
+              <>
+                <Header scoreComponent={scoreComponent}>
+                  <Categories
+                    activeIndex={activeIndex}
+                    categories={categories}
+                  />
+                </Header>
+                <Main
+                  songItems={songItems}
+                  incorrectAnswers={incorrectAnswers}
+                  isGuessed={isGuessed}
+                  guessedItemId={guessedItemId}
+                  selectedItemId={selectedItemId}
+                  onItemClick={this.handlerCheckGuessed}
+                  onNextCategoryButtonClick={this.handlerNextCategory}
+                />
+              </>
+            )
+        }
       </div>
     );
   }
