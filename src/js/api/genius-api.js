@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { geniusApi } from './credentials';
 import utils from '../utils/utils';
 
@@ -88,19 +90,32 @@ const rawGetGenresByScraping = async (songId) => {
   return response;
 };
 
-const concatenateString = (items) => items
-  .map((item) => {
-    const isReachDepth = utils.isString(item);
+const createJsxElements = (items) => items.map((item, index) => {
+  const isReachDepth = typeof item === 'string';
 
-    if (isReachDepth) {
-      return item;
-    }
+  if (isReachDepth) {
+    return item;
+  }
 
-    const { children = [''] } = item;
+  const {
+    tag,
+    attributes = null,
+    children = [''],
+  } = item;
 
-    return concatenateString(children);
-  })
-  .join('');
+  const key = `${tag}-${index}-${new Date().getTime()}`;
+
+  const isSingleTag = tag === 'br' || tag === 'img' || tag === 'hr';
+
+  return React.createElement(
+    tag,
+    {
+      ...attributes,
+      key,
+    },
+    isSingleTag ? null : createJsxElements(children),
+  );
+});
 
 class GeniusApi {
   static async search(query, mapper = null) {
@@ -147,7 +162,7 @@ class GeniusApi {
       },
     } = descriptionStructureObject;
 
-    return concatenateString(children);
+    return createJsxElements(children);
   }
 }
 

@@ -5,15 +5,20 @@ const SongCardDescription = (props) => {
   const { description } = props;
 
   return (
-    <p className="song-card__description">{description}</p>
+    <div className="song-card__description">{description}</div>
   );
 };
 
 SongCardDescription.propTypes = {
-  description: PropTypes.string,
+  description: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+    ]),
+  ),
 };
 SongCardDescription.defaultProps = {
-  description: '<-- Нет данных -->',
+  description: null,
 };
 
 export default SongCardDescription;

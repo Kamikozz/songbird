@@ -81,7 +81,12 @@ const SongCard = (props) => {
 };
 
 SongCard.propTypes = {
-  data: PropTypes.objectOf(PropTypes.string),
+  data: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array,
+    ]),
+  ),
   isExtended: PropTypes.bool,
   isGuessed: PropTypes.bool,
   parentClassName: PropTypes.string,

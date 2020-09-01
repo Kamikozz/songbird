@@ -110,7 +110,10 @@
 
   &__description {
     & {
-      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5px 10px 5px 5px;
       max-height: 200px;
       overflow-y: scroll;
   
@@ -121,6 +124,28 @@
   
       background-color: rgba(0, 0, 0, 0.2);
       border-radius: 5px;
+
+      a {
+        color: red;
+      }
+
+      p, b, strong, i, h1, h2, h3, h4, h5, h6 {
+        margin: 10px 0;
+        line-height: 1.5;
+      }
+
+      a, p {
+        text-align: justify;
+      }
+
+      strong, b {
+        font-weight: bold;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     /* styling scrollbar */
