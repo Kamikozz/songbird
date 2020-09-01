@@ -36,22 +36,7 @@ class App extends React.Component {
     const { activeIndex: activeCategoryIndex } = this.state;
 
     getSongData()
-      .then((data) => {
-        console.log(data);
-        const songGroups = {};
-
-        data.forEach((item) => {
-          const songGenres = Object.keys(songGroups);
-          const { category } = item;
-          const isExist = songGenres.some((genre) => genre === category);
-
-          if (!isExist) {
-            songGroups[category] = [];
-          }
-
-          songGroups[category].push(item);
-        });
-
+      .then((songGroups) => {
         console.log(songGroups);
 
         const songGenreNames = Object.keys(songGroups);

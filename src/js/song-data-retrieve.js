@@ -91,9 +91,9 @@ const getGeniusData = async (query) => {
 
   const { songId, artistId } = searchResult;
   const artistDescription = GeniusApi.getArtist(artistId, (artistData) => {
-    const { description: descriptionDestructurizedObject } = artistData;
+    const { description } = artistData;
 
-    return GeniusApi.getArtistDescription(descriptionDestructurizedObject);
+    return description;
   });
   const songGenres = GeniusApi.getGenresByScraping(songId);
 
@@ -175,11 +175,81 @@ const makeSongDataStructure = async (songData) => {
   return processedSongData;
 };
 
-const getSongData = async () => {
-  const dirtySongData = await getData();
-  const songData = await makeSongDataStructure(dirtySongData);
+const CACHED_SONG_DATA = 'songbirdSongData';
+const getCachedSongData = () => JSON.parse(localStorage.getItem(CACHED_SONG_DATA));
+const cacheSongData = (songData) => localStorage.setItem(
+  CACHED_SONG_DATA, JSON.stringify(songData),
+);
 
-  return songData.filter((item) => Boolean(item) && item.description !== '?');
+const getSongData = async () => {
+  // let songGroups = getCachedSongData(); // check if cached
+  let songData = getCachedSongData();
+
+  if (!songData) {
+    const dirtySongData = await getData();
+
+    console.log(dirtySongData);
+
+    songData = await makeSongDataStructure(dirtySongData);
+
+    cacheSongData(songData);
+  }
+
+  // songData.description = GeniusApi.getArtistDescription(songData.description);
+
+  console.log(songData);
+
+  let processedSongData = songData.filter((item) => {
+    if (!item) {
+      return false;
+    }
+
+    const { description } = item;
+    const {
+      dom: {
+        children: [
+          {
+            children: [
+              firstElementDescription, // there must be '?' if description is empty
+            ],
+          },
+        ],
+      },
+    } = description;
+
+    return firstElementDescription !== '?';
+  });
+
+  console.log(processedSongData);
+
+  processedSongData = processedSongData.map((item) => {
+    const localItem = item;
+    const { description } = localItem;
+
+    localItem.description = GeniusApi.getArtistDescription(description);
+
+    return localItem;
+  });
+
+  console.log(processedSongData);
+
+  const songGroups = {};
+
+  processedSongData.forEach((item) => {
+    const songGenres = Object.keys(songGroups);
+    const { category } = item;
+    const isExist = songGenres.some((genre) => genre === category);
+
+    if (!isExist) {
+      songGroups[category] = [];
+    }
+
+    songGroups[category].push(item);
+  });
+
+  // console.log(songGroups);
+
+  return songGroups;
 };
 
 export default getSongData;
