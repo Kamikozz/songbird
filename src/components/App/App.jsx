@@ -7,6 +7,7 @@ import Main from '../Main/Main';
 import Loader from '../Loader/Loader';
 
 import getSongData from '../../js/song-data-retrieve';
+import random from '../../js/utils/random';
 
 // eslint-disable-next-line import/no-unresolved
 import './App.scss';
@@ -54,15 +55,26 @@ class App extends React.Component {
           }
         });
 
-        console.log(popularSongGroups);
+        const shuffledPopularSongGenres = random.shuffleFisherYates(
+          Object.keys(popularSongGroups),
+        );
 
-        const songGenreNames = Object.keys(popularSongGroups);
-        const currentSongGenreName = songGenreNames[activeCategoryIndex];
+        const shuffledPopularSongGroups = {};
+
+        shuffledPopularSongGenres.forEach((genreName) => {
+          const genres = popularSongGroups[genreName];
+
+          shuffledPopularSongGroups[genreName] = genres;
+        });
+
+        console.log(shuffledPopularSongGroups);
+
+        const currentSongGenreName = shuffledPopularSongGenres[activeCategoryIndex];
         // take 6 elements
-        const songItems = popularSongGroups[currentSongGenreName].slice(0, 6);
+        const songItems = shuffledPopularSongGroups[currentSongGenreName].slice(0, 6);
 
         this.setState({
-          categories: songGenreNames,
+          categories: shuffledPopularSongGenres,
           songGroups,
           songItems,
           isLoading: false,
