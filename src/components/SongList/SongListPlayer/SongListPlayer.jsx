@@ -54,6 +54,7 @@ class SongListPlayer extends React.Component {
 
     if (audioSrc) {
       this.audio = new Audio(audioSrc);
+      this.audio.volume = 0.5;
       this.play();
     }
   }

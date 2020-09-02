@@ -22,6 +22,14 @@
       transition: background-color 0.35s ease-out;
     }
 
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     &_correct {
       background-color: black; // darkgreen;
       color: red;
