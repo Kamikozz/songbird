@@ -132,15 +132,8 @@ class App extends React.Component {
 
     const {
       incorrectAnswers,
-      lastClickedItemState,
     } = this.state;
     const isAlreadyIncorrect = [...incorrectAnswers].some((item) => item === selectedItemId);
-
-    if (!SONG_LIST_ITEM_STATES.isDefault(lastClickedItemState)) {
-      this.setState({
-        lastClickedItemState: SONG_LIST_ITEM_STATES.DEFAULT,
-      });
-    }
 
     if (isAlreadyIncorrect) return;
 
@@ -156,25 +149,15 @@ class App extends React.Component {
 
       this.setState({
         isGuessed,
+        lastClickedItemState: SONG_LIST_ITEM_STATES.CORRECT,
       });
-
-      if (!SONG_LIST_ITEM_STATES.isCorrect(lastClickedItemState)) {
-        this.setState({
-          lastClickedItemState: SONG_LIST_ITEM_STATES.CORRECT,
-        });
-      }
     } else {
       incorrectAnswers.add(selectedItemId);
 
       this.setState({
         incorrectAnswers,
+        lastClickedItemState: SONG_LIST_ITEM_STATES.INCORRECT,
       });
-
-      if (!SONG_LIST_ITEM_STATES.isIncorrect(lastClickedItemState)) {
-        this.setState({
-          lastClickedItemState: SONG_LIST_ITEM_STATES.INCORRECT,
-        });
-      }
     }
   }
 
