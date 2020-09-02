@@ -165,7 +165,7 @@ const makeSongDataStructure = async (songData) => {
       description,
       coverUrl,
       audioUrl,
-      header: 'WTF',
+      header: null,
       spotifyId,
     };
   });
@@ -253,6 +253,7 @@ const getSongData = async () => {
 
       return name;
     });
+    processedItem.header = processedItem.categories.join(', ');
 
     const { categories } = processedItem; // Array[5]
     const songGenres = Object.keys(songGroups);
