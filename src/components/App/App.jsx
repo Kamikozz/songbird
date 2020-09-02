@@ -55,10 +55,7 @@ class App extends React.Component {
           }
         });
 
-        const shuffledPopularSongGenres = random.shuffleFisherYates(
-          Object.keys(popularSongGroups),
-        );
-
+        const shuffledPopularSongGenres = random.shuffle(Object.keys(popularSongGroups));
         const shuffledPopularSongGroups = {};
 
         shuffledPopularSongGenres.forEach((genreName) => {
@@ -71,7 +68,9 @@ class App extends React.Component {
 
         const currentSongGenreName = shuffledPopularSongGenres[activeCategoryIndex];
         // take 6 elements
-        const songItems = shuffledPopularSongGroups[currentSongGenreName].slice(0, 6);
+        const songItems = random
+          .shuffle(shuffledPopularSongGroups[currentSongGenreName])
+          .slice(0, 6);
 
         this.setState({
           categories: shuffledPopularSongGenres,
