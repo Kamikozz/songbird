@@ -78,9 +78,11 @@ class App extends React.Component {
           .shuffle(shuffledPopularSongGroups[currentSongGenreName])
           .slice(0, 6);
 
+        console.log(songItems);
+
         this.setState({
           categories: shuffledPopularSongGenres,
-          songGroups,
+          songGroups: shuffledPopularSongGroups,
           songItems,
           isLoading: false,
         }, this.changeGuessedItem);
@@ -101,7 +103,9 @@ class App extends React.Component {
       const { songGroups } = this.state;
 
       const currentSongGenreName = categories[activeIndex];
-      const songItems = songGroups[currentSongGenreName].slice(0, 6); // take 6 elements;
+      const songItems = random
+        .shuffle(songGroups[currentSongGenreName])
+        .slice(0, 6); // take 6 elements;
 
       this.setState({
         activeIndex,

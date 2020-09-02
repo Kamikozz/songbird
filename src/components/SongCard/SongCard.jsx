@@ -8,8 +8,7 @@ import SongCardDescription from './SongCardDescription/SongCardDescription';
 import Player from '../Player/Player';
 
 import './SongCard.scss';
-
-const DEFAULT_COVER = 'https://i.pinimg.com/736x/bc/7b/fa/bc7bfa3234eff0c9814939be6faac33c.jpg';
+import DEFAULT_COVER from '../../assets/img/incognito-avatar.jpg';
 
 const SongCard = (props) => {
   const {
