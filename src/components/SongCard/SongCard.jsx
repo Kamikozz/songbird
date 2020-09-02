@@ -32,15 +32,17 @@ const SongCard = (props) => {
     song,
     description,
     header,
+    audioUrl,
     spotifyId,
   } = data;
+
   let songTitle = `${artist} - ${song}`;
-
-  songTitle = isGuessed ? songTitle : '*'.repeat(songTitle.length);
-
   let { coverUrl } = data;
 
-  coverUrl = isGuessed ? coverUrl : DEFAULT_COVER;
+  if (!isExtended) {
+    songTitle = isGuessed ? songTitle : '*'.repeat(songTitle.length);
+    coverUrl = isGuessed ? coverUrl : DEFAULT_COVER;
+  }
 
   const songCardClasses = `song-card${
     isExtended ? ` ${parentClassName}__song-card` : ''
@@ -51,6 +53,8 @@ const SongCard = (props) => {
   const songCardPlayerContainerClasses = `song-card__player-container${
     isExtended ? ` ${parentClassName}__song-card-player-container` : ''
   }`;
+
+  console.log(isExtended, data);
 
   return (
     <div
@@ -65,7 +69,7 @@ const SongCard = (props) => {
             <div className={songCardPlayerContainerClasses}>
               <h3 className="song-card__song-title">{songTitle}</h3>
               { isExtended && <h4 className="song-card__song-subtitle">{header}</h4> }
-              <Player />
+              <Player src={audioUrl} isGuessed={isGuessed} />
             </div>
           </div>
           { isExtended && (

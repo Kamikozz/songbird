@@ -104,7 +104,7 @@ const getGeniusData = async (query) => {
 
 // GeniusApi.getArtist(987404);
 const getData = async () => {
-  const songList = (await getSpotifyData()).slice(0, 100);
+  const songList = (await getSpotifyData());
 
   console.log(songList);
   const ELEMENTS_COUNT = songList.length;
@@ -214,7 +214,10 @@ const getSongData = async () => {
       },
     } = description;
 
-    return firstElementDescription !== '?';
+    const isEmptyDescription = firstElementDescription === '?';
+    const { audioUrl } = item;
+
+    return !isEmptyDescription && audioUrl;
   });
 
   console.log(processedSongData);
@@ -267,16 +270,7 @@ const getSongData = async () => {
 
       songGroups[categoryItem].push(item);
     });
-    // const isExist = songGenres.some((genre) => genre === category);
-
-    // if (!isExist) {
-    //   songGroups[category] = [];
-    // }
-
-    // songGroups[category].push(item);
   });
-
-  // console.log(songGroups);
 
   return songGroups;
 };

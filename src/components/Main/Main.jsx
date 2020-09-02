@@ -31,6 +31,7 @@ const Main = (props) => {
         <MainSectionBody
           lastClickedItemState={lastClickedItemState}
           songItems={songItems}
+          isGuessed={isGuessed}
           incorrectAnswers={incorrectAnswers}
           guessedItemId={guessedItemId}
           selectedItemId={selectedItemId}
