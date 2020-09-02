@@ -8,9 +8,14 @@ import Loader from '../Loader/Loader';
 
 import getSongData from '../../js/song-data-retrieve';
 import random from '../../js/utils/random';
+import common from '../../js/common';
 
 // eslint-disable-next-line import/no-unresolved
 import './App.scss';
+
+const {
+  SONG_LIST_ITEM_STATES,
+} = common;
 
 class App extends React.Component {
   constructor(props) {
@@ -30,6 +35,7 @@ class App extends React.Component {
       guessedItemId: '',
       selectedItemId: '',
       isLoading: true,
+      lastClickedItemState: SONG_LIST_ITEM_STATES.DEFAULT,
     };
   }
 
@@ -111,6 +117,7 @@ class App extends React.Component {
       isGuessed: false,
       incorrectAnswers: new Set(),
       selectedItemId: '',
+      lastClickedItemState: SONG_LIST_ITEM_STATES.DEFAULT,
     }, this.changeGuessedItem);
   }
 
@@ -119,8 +126,17 @@ class App extends React.Component {
 
     if (isAlreadyGuessed) return;
 
-    const { incorrectAnswers } = this.state;
+    const {
+      incorrectAnswers,
+      lastClickedItemState,
+    } = this.state;
     const isAlreadyIncorrect = [...incorrectAnswers].some((item) => item === selectedItemId);
+
+    if (!SONG_LIST_ITEM_STATES.isDefault(lastClickedItemState)) {
+      this.setState({
+        lastClickedItemState: SONG_LIST_ITEM_STATES.DEFAULT,
+      });
+    }
 
     if (isAlreadyIncorrect) return;
 
@@ -133,15 +149,28 @@ class App extends React.Component {
 
     if (isGuessed) {
       this.handlerUpdateScore();
+
       this.setState({
         isGuessed,
       });
+
+      if (!SONG_LIST_ITEM_STATES.isCorrect(lastClickedItemState)) {
+        this.setState({
+          lastClickedItemState: SONG_LIST_ITEM_STATES.CORRECT,
+        });
+      }
     } else {
       incorrectAnswers.add(selectedItemId);
 
       this.setState({
         incorrectAnswers,
       });
+
+      if (!SONG_LIST_ITEM_STATES.isIncorrect(lastClickedItemState)) {
+        this.setState({
+          lastClickedItemState: SONG_LIST_ITEM_STATES.INCORRECT,
+        });
+      }
     }
   }
 
@@ -185,6 +214,7 @@ class App extends React.Component {
       guessedItemId,
       selectedItemId,
       isLoading,
+      lastClickedItemState,
     } = this.state;
 
     const scoreComponent = <Score score={score} onUpdateScore={this.handlerUpdateScore} />;
@@ -203,6 +233,7 @@ class App extends React.Component {
                   />
                 </Header>
                 <Main
+                  lastClickedItemState={lastClickedItemState}
                   songItems={songItems}
                   incorrectAnswers={incorrectAnswers}
                   isGuessed={isGuessed}

@@ -10,6 +10,7 @@ import './Main.scss';
 const Main = (props) => {
   const {
     children,
+    lastClickedItemState,
     isGuessed,
     songItems,
     incorrectAnswers,
@@ -28,6 +29,7 @@ const Main = (props) => {
           isGuessed={isGuessed}
         />
         <MainSectionBody
+          lastClickedItemState={lastClickedItemState}
           songItems={songItems}
           incorrectAnswers={incorrectAnswers}
           guessedItemId={guessedItemId}
@@ -49,6 +51,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  lastClickedItemState: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
@@ -63,6 +66,7 @@ Main.propTypes = {
 };
 
 Main.defaultProps = {
+  lastClickedItemState: '',
   children: null,
   isGuessed: false,
   songItems: [],

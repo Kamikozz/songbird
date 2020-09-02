@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import BEMClasses from '../../js/bem-classes';
 
+import SongListPlayer from './SongListPlayer/SongListPlayer';
+
 import './SongList.scss';
 
 const dirtyClasses = {
@@ -69,6 +71,7 @@ class SongList extends React.Component {
 
   render() {
     const {
+      lastClickedItemState,
       items,
       guessedItemId,
       selectedItemId,
@@ -120,12 +123,15 @@ class SongList extends React.Component {
         <ul className={getClassName(c.ROOT.LIST)}>
           {listItemsJsx}
         </ul>
+
+        <SongListPlayer lastClickedItemState={lastClickedItemState} />
       </div>
     );
   }
 }
 
 SongList.propTypes = {
+  lastClickedItemState: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.object),
   incorrectAnswers: PropTypes.objectOf(PropTypes.any),
   guessedItemId: PropTypes.string,
@@ -134,6 +140,7 @@ SongList.propTypes = {
 };
 
 SongList.defaultProps = {
+  lastClickedItemState: '',
   items: [],
   incorrectAnswers: null,
   guessedItemId: '',

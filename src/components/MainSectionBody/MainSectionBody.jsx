@@ -23,6 +23,7 @@ class MainSectionBody extends React.Component {
 
   render() {
     const {
+      lastClickedItemState,
       songItems,
       incorrectAnswers,
       isGuessed,
@@ -36,6 +37,7 @@ class MainSectionBody extends React.Component {
       <div className="main-content-body">
         <div className="main-content-body__container">
           <SongList
+            lastClickedItemState={lastClickedItemState}
             items={songItems}
             incorrectAnswers={incorrectAnswers}
             guessedItemId={guessedItemId}
@@ -55,6 +57,7 @@ class MainSectionBody extends React.Component {
 }
 
 MainSectionBody.propTypes = {
+  lastClickedItemState: PropTypes.string,
   songItems: PropTypes.arrayOf(PropTypes.object),
   incorrectAnswers: PropTypes.objectOf(PropTypes.any),
   isGuessed: PropTypes.bool,
@@ -64,6 +67,7 @@ MainSectionBody.propTypes = {
 };
 
 MainSectionBody.defaultProps = {
+  lastClickedItemState: '',
   songItems: [],
   incorrectAnswers: null,
   isGuessed: true,
