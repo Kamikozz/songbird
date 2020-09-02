@@ -147,12 +147,18 @@ class GeniusApi {
   static async getGenresByScraping(songId) {
     const rawSongHtml = await rawGetGenresByScraping(songId);
 
-    const genresRegExp = /primary_tag","values":\["(.*)"\]},{"name":"tag_id"/;
-    const [, songGenre] = rawSongHtml.match(genresRegExp);
+    const startSequence = rawSongHtml.indexOf('&quot;genres');
+    const endSequence = rawSongHtml.indexOf(']', startSequence) + 1;
+    const slicedUnparsedString = rawSongHtml.slice(startSequence, endSequence);
+    const slicedUnescapedString = slicedUnparsedString
+      .replace(/&quot;/g, '"')
+      .replace(/&amp;/g, '&');
+    const slicedJsonReadyString = `{${slicedUnescapedString}}`;
+    const { genres: songGenres } = JSON.parse(slicedJsonReadyString);
 
-    // console.log(songGenre);
+    console.log(songGenres);
 
-    return songGenre;
+    return songGenres;
   }
 
   static getArtistDescription(descriptionStructureObject) {

@@ -39,9 +39,27 @@ class App extends React.Component {
       .then((songGroups) => {
         console.log(songGroups);
 
-        const songGenreNames = Object.keys(songGroups);
+        const popularSongGroups = {};
+        const sourceSongGenres = Object.keys(songGroups);
+
+        sourceSongGenres.forEach((genreName) => {
+          const countSongsInGroup = songGroups[genreName].length;
+          const countGroups = sourceSongGenres.length;
+          const POPULARITY_PERCENTAGE = 6;
+          const countOfPopularSongs = Math.floor(countGroups * (POPULARITY_PERCENTAGE / 100));
+          const isPopular = countSongsInGroup > countOfPopularSongs;
+
+          if (isPopular) {
+            popularSongGroups[genreName] = songGroups[genreName];
+          }
+        });
+
+        console.log(popularSongGroups);
+
+        const songGenreNames = Object.keys(popularSongGroups);
         const currentSongGenreName = songGenreNames[activeCategoryIndex];
-        const songItems = songGroups[currentSongGenreName].slice(0, 6); // take 6 elements
+        // take 6 elements
+        const songItems = popularSongGroups[currentSongGenreName].slice(0, 6);
 
         this.setState({
           categories: songGenreNames,

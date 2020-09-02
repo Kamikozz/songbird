@@ -104,7 +104,7 @@ const getGeniusData = async (query) => {
 
 // GeniusApi.getArtist(987404);
 const getData = async () => {
-  const songList = (await getSpotifyData()); // .slice(0, 100);
+  const songList = (await getSpotifyData()).slice(0, 100);
 
   console.log(songList);
   const ELEMENTS_COUNT = songList.length;
@@ -156,10 +156,10 @@ const makeSongDataStructure = async (songData) => {
       return null;
     }
 
-    const [description, category] = geniusDataItem;
+    const [description, categories] = geniusDataItem;
 
     return {
-      category,
+      categories,
       artist,
       song,
       description,
@@ -182,8 +182,7 @@ const cacheSongData = (songData) => localStorage.setItem(
 );
 
 const getSongData = async () => {
-  // let songGroups = getCachedSongData(); // check if cached
-  let songData = getCachedSongData();
+  let songData = getCachedSongData(); // check if cached
 
   if (!songData) {
     const dirtySongData = await getData();
@@ -194,8 +193,6 @@ const getSongData = async () => {
 
     cacheSongData(songData);
   }
-
-  // songData.description = GeniusApi.getArtistDescription(songData.description);
 
   console.log(songData);
 
@@ -236,15 +233,46 @@ const getSongData = async () => {
   const songGroups = {};
 
   processedSongData.forEach((item) => {
+    const processedItem = item;
+
+    processedItem.categories = processedItem.categories.map((name) => {
+      const NOT_FOUND = -1;
+      const searchForGeniusIdx = name.indexOf('Genius');
+      const isGeniusCase = searchForGeniusIdx !== NOT_FOUND;
+
+      if (isGeniusCase) {
+        return name.slice(0, searchForGeniusIdx - 1);
+      }
+
+      const searchForBracketsIdx = name.indexOf('(');
+      const isBracketsCase = searchForBracketsIdx !== NOT_FOUND;
+
+      if (isBracketsCase) {
+        return name.slice(searchForBracketsIdx + 1, name.length - 1);
+      }
+
+      return name;
+    });
+
+    const { categories } = processedItem; // Array[5]
     const songGenres = Object.keys(songGroups);
-    const { category } = item;
-    const isExist = songGenres.some((genre) => genre === category);
 
-    if (!isExist) {
-      songGroups[category] = [];
-    }
+    categories.forEach((categoryItem) => {
+      const isExist = songGenres.some((genre) => genre === categoryItem);
 
-    songGroups[category].push(item);
+      if (!isExist) {
+        songGroups[categoryItem] = [];
+      }
+
+      songGroups[categoryItem].push(item);
+    });
+    // const isExist = songGenres.some((genre) => genre === category);
+
+    // if (!isExist) {
+    //   songGroups[category] = [];
+    // }
+
+    // songGroups[category].push(item);
   });
 
   // console.log(songGroups);
