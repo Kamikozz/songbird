@@ -47,8 +47,6 @@ class App extends React.Component {
 
     getSongData()
       .then((songGroups) => {
-        console.log(songGroups);
-
         const popularSongGroups = {};
         const sourceSongGenres = Object.keys(songGroups);
 
@@ -73,15 +71,11 @@ class App extends React.Component {
           shuffledPopularSongGroups[genreName] = genres;
         });
 
-        console.log(shuffledPopularSongGroups);
-
         const currentSongGenreName = shuffledPopularSongGenres[activeCategoryIndex];
         // take 6 elements
         const songItems = random
           .shuffle(shuffledPopularSongGroups[currentSongGenreName])
           .slice(0, 6);
-
-        console.log(songItems);
 
         this.setState({
           categories: shuffledPopularSongGenres,
@@ -193,8 +187,6 @@ class App extends React.Component {
 
   changeGuessedItem() {
     const { songItems } = this.state;
-
-    console.log(songItems);
 
     const LENGTH = songItems.length;
     const RANDOM_INT = Math.floor(Math.random() * LENGTH);

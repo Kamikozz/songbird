@@ -54,8 +54,6 @@ const SongCard = (props) => {
     isExtended ? ` ${parentClassName}__song-card-player-container` : ''
   }`;
 
-  console.log(isExtended, data);
-
   return (
     <div
       style={{ backgroundImage: `url(${coverUrl})` }}

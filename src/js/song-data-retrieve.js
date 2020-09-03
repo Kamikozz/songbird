@@ -58,7 +58,6 @@ const geniusPageViewsExtractor = (item) => {
 
 const getGeniusData = async (query) => {
   const searchResult = await GeniusApi.search(query, (data) => {
-    console.log(data);
     data.sort((leftItem, rightItem) => {
       const leftItemPopularity = geniusPageViewsExtractor(leftItem);
       const rightItemPopularity = geniusPageViewsExtractor(rightItem);
@@ -105,8 +104,6 @@ const getGeniusData = async (query) => {
 // GeniusApi.getArtist(987404);
 const getData = async () => {
   const songList = (await getSpotifyData());
-
-  console.log(songList);
   const ELEMENTS_COUNT = songList.length;
 
   return {
@@ -141,8 +138,6 @@ const makeSongDataStructure = async (songData) => {
   const geniusDataListPromises = await geniusDataPromise;
   const geniusDataList = await Promise.all(geniusDataListPromises);
 
-  console.log(geniusDataList, spotifyData);
-
   const processedSongData = geniusDataList.map((geniusDataItem, index) => {
     const {
       songArtistName: artist,
@@ -170,8 +165,6 @@ const makeSongDataStructure = async (songData) => {
     };
   });
 
-  // console.log(processedSongData);
-
   return processedSongData;
 };
 
@@ -187,14 +180,10 @@ const getSongData = async () => {
   if (!songData) {
     const dirtySongData = await getData();
 
-    console.log(dirtySongData);
-
     songData = await makeSongDataStructure(dirtySongData);
 
     cacheSongData(songData);
   }
-
-  console.log(songData);
 
   let processedSongData = songData.filter((item) => {
     if (!item) {
@@ -220,8 +209,6 @@ const getSongData = async () => {
     return !isEmptyDescription && audioUrl;
   });
 
-  console.log(processedSongData);
-
   processedSongData = processedSongData.map((item) => {
     const localItem = item;
     const { description } = localItem;
@@ -230,8 +217,6 @@ const getSongData = async () => {
 
     return localItem;
   });
-
-  console.log(processedSongData);
 
   const songGroups = {};
 

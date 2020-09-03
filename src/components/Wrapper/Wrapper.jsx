@@ -6,8 +6,6 @@ import './Wrapper.scss';
 const Wrapper = (props) => {
   const { children } = props;
 
-  console.log('Wrapper render');
-
   return (
     <div className="wrapper">
       { children }

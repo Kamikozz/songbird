@@ -30,7 +30,7 @@ const rawGetArtist = async (artistId) => {
     if (!isSuccess) {
       switch (status) {
         default: {
-          console.log(`Unhandled error from ${API_NAME} with status ${status}`);
+          console.info(`Unhandled error from ${API_NAME} with status ${status}`);
           break;
         }
       }
@@ -50,7 +50,7 @@ const rawSearch = async (query) => {
   try {
     response = await requestHandler(ENDPOINT, params);
   } catch (e) {
-    console.log(e);
+    console.info(e);
   }
 
   if (response) {
@@ -60,7 +60,7 @@ const rawSearch = async (query) => {
     if (!isSuccess) {
       switch (status) {
         default: {
-          console.log(`Unhandled error from ${API_NAME} with status ${status}`);
+          console.info(`Unhandled error from ${API_NAME} with status ${status}`);
           break;
         }
       }
@@ -84,7 +84,7 @@ const rawGetGenresByScraping = async (songId) => {
     response = await fetch(url);
     response = await response.text();
   } catch (e) {
-    console.log(e);
+    console.info(e);
   }
 
   return response;
@@ -121,13 +121,9 @@ class GeniusApi {
   static async search(query, mapper = null) {
     let searchData = await rawSearch(query);
 
-    console.log('SearchData: ', searchData);
-
     if (searchData && mapper) {
       searchData = mapper(searchData);
     }
-
-    // console.log(searchData);
 
     return searchData;
   }
@@ -138,8 +134,6 @@ class GeniusApi {
     if (artistData && mapper) {
       artistData = mapper(artistData);
     }
-
-    // console.log(artistData);
 
     return artistData;
   }
@@ -155,8 +149,6 @@ class GeniusApi {
       .replace(/&amp;/g, '&');
     const slicedJsonReadyString = `{${slicedUnescapedString}}`;
     const { genres: songGenres } = JSON.parse(slicedJsonReadyString);
-
-    console.log(songGenres);
 
     return songGenres;
   }

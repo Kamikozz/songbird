@@ -7,12 +7,10 @@ import App from './components/App/App';
 
 import './index.scss';
 
-alert('Привет! Я ещё дорабатываю приложение, но оно скоро будет готово, если можешь подождать - буду очень признателен!');
-
 ReactDOM.render(
-  // <React.StrictMode>
-  <App />,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
   document.getElementById('root'),
 );
 
