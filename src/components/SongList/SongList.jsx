@@ -76,6 +76,7 @@ class SongList extends React.Component {
       guessedItemId,
       selectedItemId,
       incorrectAnswers,
+      isGuessed,
     } = this.props;
 
     const listItemsJsx = items.map(({
@@ -93,8 +94,7 @@ class SongList extends React.Component {
           itemClassName = `${itemClassName} ${getClassName(c.ROOT.ITEM.INCORRECT)}`;
         } else {
           const isCurrentItemGuessedItem = spotifyId === guessedItemId;
-          const isSelectedItemGuessedItem = selectedItemId === guessedItemId;
-          const isCorrect = isCurrentItemGuessedItem && isSelectedItemGuessedItem;
+          const isCorrect = isCurrentItemGuessedItem && isGuessed;
 
           if (isCorrect) {
             itemClassName = `${itemClassName} ${getClassName(c.ROOT.ITEM.CORRECT)}`;
@@ -137,6 +137,7 @@ SongList.propTypes = {
   guessedItemId: PropTypes.string,
   selectedItemId: PropTypes.string,
   onItemClick: PropTypes.func,
+  isGuessed: PropTypes.bool,
 };
 
 SongList.defaultProps = {
@@ -146,6 +147,7 @@ SongList.defaultProps = {
   guessedItemId: '',
   selectedItemId: '',
   onItemClick: null,
+  isGuessed: false,
 };
 
 export default SongList;

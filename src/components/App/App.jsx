@@ -141,23 +141,21 @@ class App extends React.Component {
   }
 
   handlerCheckGuessed(selectedItemId) {
-    const { isGuessed: isAlreadyGuessed } = this.state;
-
-    if (isAlreadyGuessed) return;
-
-    const {
-      incorrectAnswers,
-    } = this.state;
-    const isAlreadyIncorrect = [...incorrectAnswers].some((item) => item === selectedItemId);
-
-    if (isAlreadyIncorrect) return;
-
     const { guessedItemId } = this.state;
     const isGuessed = guessedItemId === selectedItemId;
 
     this.setState({
       selectedItemId,
     });
+
+    const { isGuessed: isAlreadyGuessed } = this.state;
+
+    if (isAlreadyGuessed) {
+      this.setState({
+        lastClickedItemState: SONG_LIST_ITEM_STATES.DEFAULT,
+      });
+      return;
+    }
 
     if (isGuessed) {
       this.handlerUpdateScore();
@@ -167,6 +165,8 @@ class App extends React.Component {
         lastClickedItemState: SONG_LIST_ITEM_STATES.CORRECT,
       });
     } else {
+      const { incorrectAnswers } = this.state;
+
       incorrectAnswers.add(selectedItemId);
 
       this.setState({

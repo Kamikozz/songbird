@@ -43,6 +43,7 @@ class MainSectionBody extends React.Component {
             guessedItemId={guessedItemId}
             selectedItemId={selectedItemId}
             onItemClick={this.onItemClick}
+            isGuessed={isGuessed}
           />
           <SongCard
             parentClassName="main-content"
