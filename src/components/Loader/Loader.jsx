@@ -6,7 +6,6 @@ import './Loader.scss';
 
 const Loader = () => (
   <div className="loader">
-    <div className="bg_color_violet" />
     <div className="loader__container">
       <div className="loader__content">
         <p>Поглядите на котейку, который играется с моим приложением :3</p>

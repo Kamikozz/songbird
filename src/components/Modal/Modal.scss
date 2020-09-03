@@ -1,0 +1,106 @@
+@import "../../scss/utils/vars";
+@import "../../scss/utils/mixins";
+
+.modal {
+  & {
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+
+    background-color: lightyellow;
+  }
+
+  &__container {
+    transition: width 0.35s ease-out;
+
+    @include for-small-phone {
+      width: 85%;
+    }
+
+    @include for-phone {
+      width: 60%;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+    font-size: 1.8rem;
+  }
+
+  &__image {
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 25%;
+    border: 1px solid black;
+
+    transition: width 0.35s ease-out;
+
+    @include for-tablet {
+      width: 80%;
+    }
+
+    @include for-desktop {
+      width: 60%;
+    }
+
+    @include for-big-desktop {
+      width: 50%;
+    }
+  }
+  
+  &__text {
+    margin: 5px 0;
+    padding: 5px 30px;
+
+    border-radius: 15px;
+    background-color: darkred;
+    color: white;
+  }
+
+  &__button {
+    padding: 5px 30px;
+
+    border-radius: 15px;
+    background-color: darkred;
+    color: white;
+  }
+
+  &__button {
+    & {
+      margin-top: 10px;
+      padding: 10px 30px;
+  
+      background-color: darkred;
+      border-radius: 10px;
+  
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.35s ease-out, background-color 0.35s ease-out;
+    }
+
+    &:hover {
+      background-color: darken(darkred, 5%);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px black;
+    }
+
+    &:disabled {
+      background-color: grey;
+      color: lightgrey;
+    }
+  }
+}

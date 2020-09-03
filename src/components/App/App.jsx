@@ -5,6 +5,7 @@ import Score from '../Score/Score';
 import Categories from '../Categories/Categories';
 import Main from '../Main/Main';
 import Loader from '../Loader/Loader';
+import Modal from '../Modal/Modal';
 
 import getSongData from '../../js/song-data-retrieve';
 import random from '../../js/utils/random';
@@ -26,6 +27,7 @@ class App extends React.Component {
     this.handlerNextCategory = this.handlerNextCategory.bind(this);
 
     this.state = {
+      maxScore: 0,
       score: 0,
       activeIndex: 0,
       categories: [],
@@ -35,6 +37,7 @@ class App extends React.Component {
       guessedItemId: '',
       selectedItemId: '',
       isLoading: true,
+      isShowModal: false,
       lastClickedItemState: SONG_LIST_ITEM_STATES.DEFAULT,
     };
   }
@@ -90,6 +93,16 @@ class App extends React.Component {
   }
 
   handlerNextCategory() {
+    const { songItems: currentSongItems } = this.state;
+
+    this.setState((state) => {
+      const { maxScore } = state;
+
+      return {
+        maxScore: maxScore + (currentSongItems.length - 1),
+      };
+    });
+
     let { activeIndex } = this.state;
 
     activeIndex += 1;
@@ -98,18 +111,20 @@ class App extends React.Component {
     const isGameEnded = activeIndex === categories.length;
 
     if (isGameEnded) {
-      alert('GAME ENDED! Retry?');
+      this.setState({
+        isShowModal: true,
+      });
     } else {
       const { songGroups } = this.state;
 
       const currentSongGenreName = categories[activeIndex];
-      const songItems = random
+      const nextSongItems = random
         .shuffle(songGroups[currentSongGenreName])
         .slice(0, 6); // take 6 elements;
 
       this.setState({
         activeIndex,
-        songItems,
+        songItems: nextSongItems,
       });
 
       this.resetGame();
@@ -195,12 +210,14 @@ class App extends React.Component {
       score,
       activeIndex,
       categories,
+      maxScore,
       songItems,
       incorrectAnswers,
       isGuessed,
       guessedItemId,
       selectedItemId,
       isLoading,
+      isShowModal,
       lastClickedItemState,
     } = this.state;
 
@@ -232,6 +249,7 @@ class App extends React.Component {
               </>
             )
         }
+        { isShowModal && <Modal score={score} maxScore={maxScore} /> }
       </div>
     );
   }
